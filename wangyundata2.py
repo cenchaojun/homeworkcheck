@@ -3,7 +3,7 @@ import random
 from shutil import copy2
 
 
-def data_set_split(src_data_folder, target_data_folder, train_scale=0.13, val_scale=0.0, test_scale=0.87):
+def data_set_split(src_data_folder, target_data_folder, train_scale=0.8, val_scale=0.0, test_scale=0.2):
     '''
     读取源数据文件夹，生成划分好的文件夹，分为trian、val、test三个文件夹进行
     :param src_data_folder: 源文件夹 E:/biye/gogogo/note_book/torch_note/data/utils_test/data_split/src_data
@@ -47,6 +47,7 @@ def data_set_split(src_data_folder, target_data_folder, train_scale=0.13, val_sc
         # val_stop_flag = 10
         train_stop_flag = current_data_length * train_scale
         val_stop_flag = current_data_length * (train_scale + val_scale)
+        # train_stop_flag = 19
         current_idx = 0
         train_num = 0
         val_num = 0
@@ -57,10 +58,10 @@ def data_set_split(src_data_folder, target_data_folder, train_scale=0.13, val_sc
                 copy2(src_img_path, train_folder)
                 # print("{}复制到了{}".format(src_img_path, train_folder))
                 train_num = train_num + 1
-            elif (current_idx > train_stop_flag) and (current_idx <= val_stop_flag):
-                copy2(src_img_path, val_folder)
-                # print("{}复制到了{}".format(src_img_path, val_folder))
-                val_num = val_num + 1
+            # elif (current_idx > train_stop_flag) and (current_idx <= val_stop_flag):
+            #     copy2(src_img_path, val_folder)
+            #     # print("{}复制到了{}".format(src_img_path, val_folder))
+            #     val_num = val_num + 1
             else:
                 copy2(src_img_path, test_folder)
                 # print("{}复制到了{}".format(src_img_path, test_folder))
@@ -77,6 +78,7 @@ def data_set_split(src_data_folder, target_data_folder, train_scale=0.13, val_sc
 
 
 if __name__ == '__main__':
-    src_data_folder = "D:/2021.5/王云数据集/数据集/class_coil_crop"  # todo 原始数据集目录
-    target_data_folder = "D:/2021.5/王云数据集/数据集/coil_crop_train_val"  # todo 数据集分割之后存放的目录
+    # D:\2021.5\王云数据集\数据集\王云DL方法对比\划分后的数据\AR50x40
+    src_data_folder = "D:/2021.5/王云数据集/数据集/王云DL方法对比/划分后的数据/256_ObjectCategories"  # todo 原始数据集目录
+    target_data_folder = "D:/2021.5/王云数据集/数据集/王云DL方法对比/训练集和测试集的划分/256_ObjectCategories"  # todo 数据集分割之后存放的目录
     data_set_split(src_data_folder, target_data_folder)
